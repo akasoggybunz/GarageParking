@@ -53,11 +53,11 @@ namespace garageParking {
                                 // Green
                                 //Console.WriteLine ("GREEN");
                                 ColorWipe (neo, Color.Green, Count);
-                            } else if (distance.Centimeters <= 60 && distance.Centimeters >= 30.1) {
+                            } else if (distance.Centimeters <= 60 && distance.Centimeters >= 12.1) {
                                 // Yellow
                                 //Console.WriteLine ("Yellow");
                                 ColorWipe (neo, Color.Yellow, Count);
-                            } else if (distance.Centimeters <= 30) {
+                            } else if (distance.Centimeters <= 12) {
                                 // RED
                                 //Console.WriteLine ("Red");
                                 ColorWipe (neo, Color.Red, Count);
@@ -68,7 +68,7 @@ namespace garageParking {
                                 while (sleep) {
                                     // Sleeping
                                     if (sonar.TryGetDistance (out Length distanceSleep)) {
-                                        if (distanceSleep.Centimeters >= 30.1) {
+                                        if (distanceSleep.Centimeters >= 9.1) {
                                             sleep = false;
                                         } else {
                                             
