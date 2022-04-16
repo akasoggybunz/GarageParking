@@ -41,53 +41,49 @@ namespace garageParking {
                 Console.Clear ();
             };
 
-using (var sonar = new Hcsr04 (4, 17)) {
-            while (true) {
-                
+            using (var sonar = new Hcsr04 (4, 17)) {
+                while (true) {
+
                     try {
 
                         if (sonar.TryGetDistance (out Length distance)) {
 
-                            Console.WriteLine ($"Distance: {distance.Centimeters} cm");
-                            if (distance.Centimeters >=60.1) {
+                            //Console.WriteLine ($"Distance: {distance.Centimeters} cm");
+                            if (distance.Centimeters >= 60.1) {
                                 // Green
-                                Console.WriteLine ("GREEN");
+                                //Console.WriteLine ("GREEN");
                                 ColorWipe (neo, Color.Green, Count);
                             } else if (distance.Centimeters <= 60 && distance.Centimeters >= 30.1) {
                                 // Yellow
-                                Console.WriteLine ("Yellow");
+                                //Console.WriteLine ("Yellow");
                                 ColorWipe (neo, Color.Yellow, Count);
                             } else if (distance.Centimeters <= 30) {
                                 // RED
-                                Console.WriteLine ("Red");
+                                //Console.WriteLine ("Red");
                                 ColorWipe (neo, Color.Red, Count);
                                 // Go to Sleep
-                                Thread.Sleep(5000);
-                                BitmapImage img = neo.Image;
-                                img.Clear ();
-                                neo.Update ();
-                                Console.Clear ();
+                                Thread.Sleep (1000);
 
                                 bool sleep = true;
-                                while(sleep)
-                                {
+                                while (sleep) {
                                     // Sleeping
-                                    if (sonar.TryGetDistance (out Length distanceSleep)) 
-                                    {
-                                        if (distanceSleep.Centimeters >= 30.1)
-                                        {
+                                    if (sonar.TryGetDistance (out Length distanceSleep)) {
+                                        if (distanceSleep.Centimeters >= 30.1) {
                                             sleep = false;
-                                        }
-                                        else{
-                                            Console.WriteLine ($"Sleeping Distance: {distanceSleep.Centimeters} cm");
-                                            Thread.Sleep(5000);
+                                        } else {
+                                            BitmapImage img = neo.Image;
+                                            img.Clear ();
+                                            neo.Update ();
+                                            //Console.Clear ();
+                                            //Console.WriteLine ($"Sleeping Distance: {distanceSleep.Centimeters} cm");
+                                            Thread.Sleep (2000);
                                         }
                                     }
-                                    
+
                                 }
                             }
                         } else {
-                            Console.WriteLine ("Error reading sensor");
+                            //Console.WriteLine ("Error reading sensor");
                         }
 
                         Thread.Sleep (1000);
