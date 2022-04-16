@@ -48,7 +48,7 @@ namespace garageParking {
 
                         if (sonar.TryGetDistance (out Length distance)) {
 
-                            //Console.WriteLine ($"Distance: {distance.Centimeters} cm");
+                            Console.WriteLine ($"Distance: {distance.Centimeters} cm");
                             if (distance.Centimeters >= 60.1) {
                                 // Green
                                 //Console.WriteLine ("GREEN");
@@ -62,7 +62,7 @@ namespace garageParking {
                                 //Console.WriteLine ("Red");
                                 ColorWipe (neo, Color.Red, Count);
                                 // Go to Sleep
-                                Thread.Sleep (1000);
+                                //Thread.Sleep (1000);
 
                                 bool sleep = true;
                                 while (sleep) {
@@ -71,22 +71,26 @@ namespace garageParking {
                                         if (distanceSleep.Centimeters >= 30.1) {
                                             sleep = false;
                                         } else {
+                                            
+                                            //Console.Clear ();
+                                            Console.WriteLine ($"Sleeping Distance: {distanceSleep.Centimeters} cm");
+                                            Thread.Sleep (2000);
                                             BitmapImage img = neo.Image;
                                             img.Clear ();
                                             neo.Update ();
-                                            //Console.Clear ();
-                                            //Console.WriteLine ($"Sleeping Distance: {distanceSleep.Centimeters} cm");
-                                            Thread.Sleep (2000);
                                         }
+                                    }
+                                    else{
+                                        Console.WriteLine ("Sleep: No sensor Read");
                                     }
 
                                 }
                             }
                         } else {
-                            //Console.WriteLine ("Error reading sensor");
+                            Console.WriteLine ("No sensor Read");
                         }
 
-                        Thread.Sleep (1000);
+                        Thread.Sleep (100);
                     } catch (Exception ex) {
                         // TODO 
                     }
